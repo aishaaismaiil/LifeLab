@@ -2,7 +2,7 @@
 
 Simulador de decisões de vida e guia de burocracia para Portugal (PT · EN · ES).
 
-**Ver online:** https://aishaaismaiil.github.io/lifelab/
+**Ver online:** https://aishaaismaiil.github.io/LifeLab/
 
 ## O que faz
 - **Máquina do tempo**: escolhe um objetivo (abrir um negócio, primeiro emprego, sair de casa, ter um filho…) e vê os próximos 3 anos, mês a mês: dinheiro, progresso e risco. Avança, recua, muda uma decisão do passado e nasce um ramo novo; compara os ramos.
