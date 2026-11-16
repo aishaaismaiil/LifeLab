@@ -675,9 +675,16 @@ main > *:nth-child(2){animation-delay:.05s} main > *:nth-child(3){animation-dela
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.lifelines .ll{stroke-dashoffset:0}.lifelines .lln{opacity:1}}
 
 /* ===== v1.0: máquina do tempo, ajuda prática e contas ===== */
+.spec{display:grid;gap:12px;padding:16px;border-radius:16px;border:1px solid var(--line);background:var(--surface);margin:0 0 16px}
+.spec.need{border-color:var(--c,var(--accent));box-shadow:inset 0 0 0 1px var(--c,var(--accent))}
+.spec-h{display:grid;gap:2px}.spec-h small{color:var(--muted);font-size:.86rem;line-height:1.4}
+.spec-add{margin:0;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--c,var(--accent)) 10%,var(--surface));font-size:.88rem}
+.spec-h b{font-size:1.05rem}.sfield{display:grid;gap:6px;border:0;padding:0;background:none}.sfield span{font-weight:600;font-size:.9rem}
+.tmd-kit{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:6px;font-size:.84rem;color:var(--muted)}.tmd-kit .linkbtn{padding:2px 0}
 .diff{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}
-.diff>div{display:grid;gap:4px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface)}
-.diff>div.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.diff>*{display:grid;gap:4px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);text-align:left;font:inherit;color:inherit}
+.diff>button:hover{border-color:var(--ink)}
+.diff>.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 .diff b{display:flex;align-items:center;gap:8px;font-size:.95rem}.diff span{font-size:.86rem;color:var(--muted);line-height:1.4}
 @media (max-width:640px){.diff{grid-template-columns:1fr}}
 .tm-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:14px}
@@ -1181,8 +1188,8 @@ testamento:["Hacer testamento",["Pide cita en una notaría.","Decide qué dejas 
 
 // ================= Línguas =================
 const UI={
-pt:{tab_simular:"Simular",tab_planear:"Planear",tab_comparar:"Comparar",tab_mitos:"Achas que sabes?",tab_guia:"Onde tratar",
- nav_simular:"Simular",nav_planear:"Planear",nav_comparar:"Comparar",nav_mitos:"Mitos",nav_guia:"Guia",
+pt:{tab_comparar:"Comparar",tab_mitos:"Achas que sabes?",tab_guia:"Onde tratar",
+ nav_comparar:"Comparar",nav_mitos:"Mitos",nav_guia:"Guia",
  edit:"Editar",you:"Tu",here:"Estás aqui",years:"anos",docs_n:"documentos",change:"Mudar",
  disclaimer:"Referência para Portugal em 2026. Regras, prazos e custos mudam: confirma sempre no site oficial antes de decidir. Custos e tempos são estimativas.",
  plan_h:"Para onde queres |ir|?",plan_p:"Escolhe um destino. O caminho ajusta-se ao teu perfil e mostra cada paragem: onde, como e o que ninguém te conta.",
@@ -1213,8 +1220,8 @@ pt:{tab_simular:"Simular",tab_planear:"Planear",tab_comparar:"Comparar",tab_mito
  sh_h:"Onde estás agora?",sh_p:"Tudo o que mudares aqui atualiza os caminhos, a comparação e a simulação.",close:"Fechar",name:"Nome",name_ph:"Ex.: Inês",age:"Idade",nat:"Nacionalidade",edu:"Estudos",work:"Situação",home:"Casa",region:"Onde vives",family:"Família",partner:"Tenho companheiro(a)",kids:"filhos",savings:"Poupança disponível",have_docs:"O que já tens",docs_note:"O que marcares aparece como \"já tens\" e não conta para o tempo nem para o custo.",see_paths:"Ver os meus caminhos",
  v_h:"Vida |guiada|",v_p:"Para quem ainda não sabe bem o que quer: começas na tua idade e situação e vais escolhendo. Cada decisão mostra onde se trata na vida real. Podes voltar atrás quando quiseres.",v_start:"Começar aos {n} anos",v_back:"Voltar atrás",v_restart:"Recomeçar",v_chose:"Escolheste",v_irl:"Na vida real, toca para ver como se faz",v_nopaper:"Esta escolha não precisa de papéis.",v_cont:"Continuar",v_end:"Fim da simulação",v_endh:"A tua vida, escolha a escolha.",v_peryear:"por ano",v_nobur:"sem burocracia",v_toSim:"Voltar ao simulador",
  hero_l:["daqui a 1 ano","5 anos","10 anos","20 anos","outra vida"],hero_k:"Cada decisão abre um caminho",st_m:"Dinheiro",st_s:"Saúde",st_b:"Bem-estar",st_r:"Relações",st_c:"Competências",lang:"Língua"},
-en:{tab_simular:"Simulate",tab_planear:"Plan",tab_comparar:"Compare",tab_mitos:"Think you know?",tab_guia:"Where to go",
- nav_simular:"Simulate",nav_planear:"Plan",nav_comparar:"Compare",nav_mitos:"Myths",nav_guia:"Guide",
+en:{tab_comparar:"Compare",tab_mitos:"Think you know?",tab_guia:"Where to go",
+ nav_comparar:"Compare",nav_mitos:"Myths",nav_guia:"Guide",
  edit:"Edit",you:"You",here:"You are here",years:"years old",docs_n:"documents",change:"Change",
  disclaimer:"Reference for Portugal in 2026. Rules, deadlines and costs change: always check the official website before deciding. Costs and times are estimates.",
  plan_h:"Where do you want to |go|?",plan_p:"Pick a destination. The route adapts to your profile and shows every stop: where, how, and what nobody tells you.",
@@ -1245,8 +1252,8 @@ en:{tab_simular:"Simulate",tab_planear:"Plan",tab_comparar:"Compare",tab_mitos:"
  sh_h:"Where are you now?",sh_p:"Everything you change here updates the routes, the comparison and the simulation.",close:"Close",name:"Name",name_ph:"E.g. Inês",age:"Age",nat:"Nationality",edu:"Education",work:"Situation",home:"Home",region:"Where you live",family:"Family",partner:"I have a partner",kids:"children",savings:"Available savings",have_docs:"What you already have",docs_note:"Whatever you tick shows as \"you have it\" and doesn't count towards time or cost.",see_paths:"See my paths",
  v_h:"Guided |life|",v_p:"For anyone who isn't sure what they want yet: you start at your age and situation and keep choosing. Each decision shows where it's handled in real life. You can go back whenever you like.",v_start:"Start at age {n}",v_back:"Go back",v_restart:"Start again",v_chose:"You chose",v_irl:"In real life, tap to see how it's done",v_nopaper:"This choice needs no paperwork.",v_cont:"Continue",v_end:"End of the simulation",v_endh:"Your life, choice by choice.",v_peryear:"per year",v_nobur:"no paperwork",v_toSim:"Back to the simulator",
  hero_l:["in 1 year","5 years","10 years","20 years","another life"],hero_k:"Every decision opens a path",st_m:"Money",st_s:"Health",st_b:"Wellbeing",st_r:"Relationships",st_c:"Skills",lang:"Language"},
-es:{tab_simular:"Simular",tab_planear:"Planificar",tab_comparar:"Comparar",tab_mitos:"¿Crees que lo sabes?",tab_guia:"Dónde tramitar",
- nav_simular:"Simular",nav_planear:"Planificar",nav_comparar:"Comparar",nav_mitos:"Mitos",nav_guia:"Guía",
+es:{tab_comparar:"Comparar",tab_mitos:"¿Crees que lo sabes?",tab_guia:"Dónde tramitar",
+ nav_comparar:"Comparar",nav_mitos:"Mitos",nav_guia:"Guía",
  edit:"Editar",you:"Tú",here:"Estás aquí",years:"años",docs_n:"documentos",change:"Cambiar",
  disclaimer:"Referencia para Portugal en 2026. Las normas, plazos y costes cambian: confírmalo siempre en la web oficial antes de decidir. Costes y tiempos son estimaciones.",
  plan_h:"¿Adónde quieres |ir|?",plan_p:"Elige un destino. El camino se adapta a tu perfil y muestra cada parada: dónde, cómo y lo que nadie te cuenta.",
@@ -1450,6 +1457,64 @@ const G=[
    [tx("Depois","Afterwards","Después"),tx("Testamento vital e testamento evitam decisões difíceis aos teus.","A living will and a will spare your loved ones hard decisions.","El testamento vital y el testamento evitan decisiones difíciles a los tuyos.")]]})}
 ];
 const GI=Object.fromEntries(G.map(g=>[g.id,g]));
+// ================= Especificar o caso (área + mais informação) =================
+// Cada decisão pergunta a área e deixa escrever mais detalhes. O que a pessoa escolhe altera os passos
+// (no negócio, acrescenta passos do setor) e segue como contexto para os emails e para a IA.
+Object.assign(ENTL.pt,{ASAE:"ASAE",ERS:"ERS",CNPD:"CNPD",DGERT:"DGERT",ORD:"Ordem profissional"});
+Object.assign(ENTL.en,{ASAE:"ASAE (food and consumer safety)",ERS:"ERS (health regulator)",CNPD:"CNPD (data protection)",DGERT:"DGERT (training bodies)",ORD:"Professional body"});
+Object.assign(ENTL.es,{ASAE:"ASAE (seguridad alimentaria y consumo)",ERS:"ERS (regulador de salud)",CNPD:"CNPD (protección de datos)",DGERT:"DGERT (entidades formadoras)",ORD:"Colegio profesional"});
+PH.Setor=["O teu setor","Your sector","Tu sector"];
+Object.assign(S,{
+ setor_rest:{t:"Segurança alimentar e licenças de restauração ou alojamento",e:"ASAE",w:4,c:0,h:["Confirma no ePortugal que procedimento a tua atividade exige (restauração, bebidas ou alojamento local) antes de assinares o arrendamento.","Quem manipula alimentos precisa de um plano de segurança alimentar baseado em HACCP e de formação adequada. Pergunta à ASAE o que se aplica ao teu caso.","O alojamento local tem registo próprio (RNAL), feito online no Balcão do Empreendedor."],l:"licença de utilização do espaço, memória descritiva, plano HACCP",x:"Muitos projetos de restauração perdem meses porque o espaço arrendado não permitia essa atividade. Confirma na câmara antes de assinar.",u:"https://www.asae.gov.pt/"},
+ setor_saude:{t:"Registo e habilitações para saúde, estética e bem-estar",e:"ERS",w:6,c:0,h:["Os estabelecimentos que prestam cuidados de saúde registam-se na ERS (Entidade Reguladora da Saúde) antes de abrir.","Só profissionais habilitados fazem atos de saúde: psicólogos precisam de cédula da Ordem dos Psicólogos e os procedimentos estéticos invasivos (injetáveis, alguns lasers) são atos de saúde.","Se tens dúvidas sobre se a tua atividade conta como saúde, pergunta à ERS antes de comprares equipamento."],l:"cédula ou habilitação profissional, identificação do espaço, responsável técnico",x:"Fazer procedimentos de saúde sem registo e sem profissionais habilitados pode dar coimas e obrigar a fechar o espaço.",u:"https://www.ers.pt/"},
+ setor_com:{t:"Livro de Reclamações e regras de venda ao consumidor",e:"ASAE",w:2,c:0,h:["Se vendes a consumidores, tens de disponibilizar o Livro de Reclamações. Confirma no ePortugal se é em papel, eletrónico ou ambos no teu caso.","Nas vendas online, o cliente tem em regra 14 dias para devolver sem dar razões. Põe isto nos teus termos de venda.","Mostra os preços com IVA incluído e dá informação clara sobre o produto, as devoluções e as garantias."],l:"termos de venda, política de devoluções, dados da empresa",x:"Se vendes online para outros países da UE, as regras de IVA podem ser diferentes. Fala com um contabilista antes da primeira venda.",u:"https://www.asae.gov.pt/"},
+ setor_serv:{t:"Inscrição profissional e seguro de responsabilidade civil",e:"ORD",w:4,c:0,h:["Vê se a tua profissão é regulada. Contabilistas, psicólogos, médicos, enfermeiros, advogados e outras profissões precisam de inscrição na respetiva ordem para exercer.","Pergunta à ordem se tens de ter seguro de responsabilidade civil profissional e que cobertura mínima pedem.","Mesmo sem ordem, faz sempre contrato escrito com os clientes: serviço, preço, prazo e responsabilidades."],l:"diploma, cédula ou comprovativo de estágio, modelo de contrato",x:"Exercer uma profissão regulada sem a inscrição exigida pode ser ilegal, mesmo com NIF e atividade abertos nas Finanças."},
+ setor_dig:{t:"Proteção de dados e termos para produtos digitais",e:"CNPD",w:2,c:0,h:["Se guardas dados pessoais de clientes ou utilizadores (nomes, emails, localização), o RGPD aplica-se: precisas de uma política de privacidade clara e de uma razão legal para tratar cada dado.","Escreve termos e condições e, se tiveres site, uma política de cookies. Diz o que recolhes, para quê e como se apaga.","A CNPD é a autoridade em Portugal e tem orientações para pequenas empresas."],l:"política de privacidade, termos e condições, lista dos dados que recolhes",x:"O RGPD aplica-se a todas as dimensões de negócio. Uma app que guarda dados sem avisar as pessoas pode ser multada.",u:"https://www.cnpd.pt/"},
+ setor_edu:{t:"Entidade formadora certificada",e:"DGERT",w:8,c:0,h:["Se vais dar formação certificada (com certificado reconhecido), a entidade tem de estar certificada pela DGERT.","Para explicações ou workshops sem certificação oficial não precisas dela, mas diz isso com clareza nos materiais.","Se trabalhas com menores, confirma que requisitos legais se aplicam (por exemplo, registo criminal) antes de começares."],l:"plano de formação, formadores com qualificação, regulamento",x:"Anunciar a formação como «certificada» sem a entidade estar certificada pode ser considerado publicidade enganosa.",u:"https://www.dgert.gov.pt/"}});
+Object.assign(S_EN,{
+ setor_rest:["Food safety and licences for food service or lodging",["Check on ePortugal which procedure your activity needs (food, drinks or short-term lodging) before you sign a lease.","Anyone handling food needs a HACCP-based food safety plan and suitable training. Ask ASAE what applies to you.","Short-term lodging has its own register (RNAL), done online on the Balcão do Empreendedor."],"usage licence of the premises, description of the premises, HACCP plan","Many food projects lose months because the leased premises didn't allow that activity. Check with the town hall before signing.",null],
+ setor_saude:["Registration and qualifications for health, beauty and wellbeing",["Establishments that provide health care register with the ERS (health regulator) before opening.","Only qualified professionals perform health acts: psychologists need a licence from the Ordem dos Psicólogos and invasive aesthetic procedures (injectables, some lasers) count as health acts.","If you're unsure whether your activity counts as health, ask the ERS before buying equipment."],"professional licence or qualification, identification of the premises, technical manager","Doing health procedures without registration and qualified staff can bring fines and closure.",null],
+ setor_com:["Complaints book and consumer sales rules",["If you sell to consumers you must provide the Livro de Reclamações. Check on ePortugal whether yours is paper, electronic or both.","For online sales the customer usually has 14 days to return goods without giving a reason. Put this in your terms of sale.","Show prices with VAT included and give clear information about the product, returns and warranties."],"terms of sale, returns policy, company details","If you sell online to other EU countries, VAT rules may differ. Talk to an accountant before your first sale.",null],
+ setor_serv:["Professional registration and liability insurance",["Check whether your profession is regulated. Accountants, psychologists, doctors, nurses, lawyers and others need to register with their professional body to practise.","Ask the professional body whether you need professional liability insurance and what minimum cover it requires.","Even without a professional body, always use a written contract: service, price, deadline and responsibilities."],"degree, licence or proof of traineeship, contract template","Practising a regulated profession without the required registration can be illegal, even with a tax number and activity opened.",null],
+ setor_dig:["Data protection and terms for digital products",["If you keep personal data about customers or users (names, emails, location), GDPR applies: you need a clear privacy policy and a legal reason for each piece of data.","Write terms and conditions and, if you have a website, a cookie policy. Say what you collect, why and how it can be deleted.","The CNPD is the authority in Portugal and has guidance for small businesses."],"privacy policy, terms and conditions, list of the data you collect","GDPR applies to businesses of every size. An app that stores people's data without telling them can be fined.",null],
+ setor_edu:["Certified training body",["If you will offer certified training (with a recognised certificate), your organisation must be certified by DGERT.","For tutoring or workshops without official certification you don't need it, but say so clearly in your materials.","If you work with minors, check which legal requirements apply (for example a criminal record certificate) before you start."],"training plan, qualified trainers, regulations","Advertising training as «certified» when the organisation isn't certified can count as misleading advertising.",null]});
+Object.assign(S_ES,{
+ setor_rest:["Seguridad alimentaria y licencias de restauración o alojamiento",["Mira en ePortugal qué trámite exige tu actividad (restauración, bebidas o alojamiento local) antes de firmar el alquiler.","Quien manipula alimentos necesita un plan de seguridad alimentaria basado en HACCP y formación adecuada. Pregunta a la ASAE qué se aplica a tu caso.","El alojamiento local tiene registro propio (RNAL), que se hace en línea en el Balcão do Empreendedor."],"licencia de uso del local, memoria descriptiva, plan HACCP","Muchos proyectos de restauración pierden meses porque el local alquilado no permitía esa actividad. Confírmalo en el ayuntamiento antes de firmar.",null],
+ setor_saude:["Registro y habilitación para salud, estética y bienestar",["Los establecimientos que prestan atención sanitaria se registran en la ERS (regulador de la salud) antes de abrir.","Solo los profesionales habilitados hacen actos sanitarios: los psicólogos necesitan la cédula de la Ordem dos Psicólogos y los procedimientos estéticos invasivos (inyectables, algunos láseres) son actos sanitarios.","Si dudas de si tu actividad cuenta como salud, pregunta a la ERS antes de comprar equipamiento."],"cédula o habilitación profesional, identificación del local, responsable técnico","Hacer procedimientos sanitarios sin registro y sin profesionales habilitados puede acarrear multas y el cierre del local.",null],
+ setor_com:["Libro de Reclamaciones y reglas de venta al consumidor",["Si vendes a consumidores, tienes que disponer del Livro de Reclamações. Confirma en ePortugal si es en papel, electrónico o ambos en tu caso.","En las ventas en línea, el cliente suele tener 14 días para devolver sin dar motivos. Ponlo en tus condiciones de venta.","Muestra los precios con IVA incluido y da información clara sobre el producto, las devoluciones y las garantías."],"condiciones de venta, política de devoluciones, datos de la empresa","Si vendes en línea a otros países de la UE, las reglas del IVA pueden ser distintas. Habla con un contable antes de la primera venta.",null],
+ setor_serv:["Colegiación profesional y seguro de responsabilidad civil",["Mira si tu profesión está regulada. Contables, psicólogos, médicos, enfermeros, abogados y otras profesiones necesitan colegiarse para ejercer.","Pregunta al colegio si tienes que tener seguro de responsabilidad civil profesional y qué cobertura mínima exigen.","Aunque no haya colegio, haz siempre contrato escrito con los clientes: servicio, precio, plazo y responsabilidades."],"título, cédula o justificante de prácticas, modelo de contrato","Ejercer una profesión regulada sin la colegiación exigida puede ser ilegal, incluso con NIF y actividad dados de alta.",null],
+ setor_dig:["Protección de datos y condiciones para productos digitales",["Si guardas datos personales de clientes o usuarios (nombres, emails, ubicación), se aplica el RGPD: necesitas una política de privacidad clara y una base legal para cada dato.","Escribe términos y condiciones y, si tienes web, una política de cookies. Di qué recoges, para qué y cómo se borra.","La CNPD es la autoridad en Portugal y tiene guías para pequeñas empresas."],"política de privacidad, términos y condiciones, lista de los datos que recoges","El RGPD se aplica a negocios de cualquier tamaño. Una app que guarda datos sin avisar a las personas puede ser multada.",null],
+ setor_edu:["Entidad formadora certificada",["Si vas a dar formación certificada (con certificado reconocido), la entidad tiene que estar certificada por la DGERT.","Para clases particulares o talleres sin certificación oficial no la necesitas, pero dilo con claridad en tus materiales.","Si trabajas con menores, confirma qué requisitos legales se aplican (por ejemplo, certificado de antecedentes penales) antes de empezar."],"plan de formación, formadores cualificados, reglamento","Anunciar la formación como «certificada» sin que la entidad lo esté puede considerarse publicidad engañosa.",null]});
+
+const AREAS_W=[["saude",["Saúde e bem-estar","Health and wellbeing","Salud y bienestar"]],["edu",["Educação e formação","Education and training","Educación y formación"]],["tec",["Tecnologia e digital","Technology and digital","Tecnología y digital"]],["com",["Comércio e serviços","Retail and services","Comercio y servicios"]],["pub",["Administração pública","Public sector","Administración pública"]],["ind",["Indústria e construção","Industry and construction","Industria y construcción"]],["cri",["Cultura e criatividade","Culture and creative work","Cultura y creatividad"]],["out",["Outra área","Another field","Otra área"]]];
+const SPEC={
+ negocio:{q:["Em que área é o negócio?","What field is the business in?","¿En qué área es el negocio?"],o:[["rest",["Restauração e alojamento","Food and lodging","Restauración y alojamiento"],["setor_rest"]],["saude",["Saúde, estética e bem-estar","Health, beauty and wellbeing","Salud, estética y bienestar"],["setor_saude"]],["com",["Loja ou comércio online","Shop or online store","Tienda o comercio en línea"],["setor_com"]],["serv",["Serviços e consultoria","Services and consulting","Servicios y consultoría"],["setor_serv"]],["dig",["Tecnologia, apps e digital","Tech, apps and digital","Tecnología, apps y digital"],["setor_dig"]],["edu",["Educação e formação","Education and training","Educación y formación"],["setor_edu"]],["out",["Outra área","Another field","Otra área"],[]]],ph:["Ex.: um centro de estética com injetáveis, sozinha, num espaço arrendado em Cascais. Tenho 8.000 € e quero abrir em 6 meses.","E.g. a beauty salon offering injectables, on my own, in rented premises in Cascais. I have €8,000 and want to open in 6 months.","P. ej.: un centro de estética con inyectables, yo sola, en un local alquilado en Cascais. Tengo 8.000 € y quiero abrir en 6 meses."]},
+ emprego:{q:["Em que área queres trabalhar?","Which field do you want to work in?","¿En qué área quieres trabajar?"],o:AREAS_W,ph:["Ex.: enfermagem, a começar logo depois do curso, perto de casa.","E.g. nursing, starting right after my degree, close to home.","P. ej.: enfermería, empezando justo después del grado, cerca de casa."]},
+ carreira:{q:["Para que área queres mudar?","Which field do you want to move into?","¿A qué área quieres cambiar?"],o:AREAS_W,ph:["Ex.: venho da banca e quero passar para dados, sem baixar muito o salário.","E.g. I'm coming from banking and want to move into data without a big pay cut.","P. ej.: vengo de la banca y quiero pasar a datos, sin bajar mucho el sueldo."]},
+ estudar:{q:["Que área de estudos?","Which field of study?","¿Qué área de estudios?"],o:AREAS_W,ph:["Ex.: Psicologia, em horário pós-laboral porque trabalho.","E.g. Psychology, evening classes because I work.","P. ej.: Psicología, en horario de tarde porque trabajo."]},
+ sair:{q:["O que pesa mais na escolha da casa?","What matters most in choosing a home?","¿Qué pesa más al elegir casa?"],o:[["preco",["Preço baixo","Low price","Precio bajo"]],["perto",["Perto do trabalho ou da escola","Close to work or school","Cerca del trabajo o del centro de estudios"]],["familia",["Perto da família","Close to family","Cerca de la familia"]],["espaco",["Mais espaço","More space","Más espacio"]]],ph:["Ex.: tenho um gato, ganho 900 € e preciso de estar perto do comboio.","E.g. I have a cat, earn €900 and need to be near the train.","P. ej.: tengo un gato, gano 900 € y necesito estar cerca del tren."]},
+ casa:{q:["Que tipo de casa?","What kind of home?","¿Qué tipo de casa?"],o:[["apt",["Apartamento","Flat","Piso"]],["mor",["Moradia","House","Casa"]],["inv",["Para investir ou arrendar","To invest or let out","Para invertir o alquilar"]]],ph:["Ex.: primeira casa para mim e o meu companheiro, T2, até 220.000 €.","E.g. first home for me and my partner, 2-bed, up to €220,000.","P. ej.: primera casa para mi pareja y para mí, 2 dormitorios, hasta 220.000 €."]},
+ mudar:{q:["De que região do mundo vens?","Which part of the world are you coming from?","¿De qué región del mundo vienes?"],o:[["cplp",["Brasil ou outro país de língua portuguesa","Brazil or another Portuguese-speaking country","Brasil u otro país de lengua portuguesa"]],["eur",["Resto da Europa","Rest of Europe","Resto de Europa"]],["ame",["Américas (fora do Brasil)","The Americas (outside Brazil)","América (fuera de Brasil)"]],["asia",["Ásia","Asia","Asia"]],["afr",["África (fora da lusofonia)","Africa (non-Portuguese-speaking)","África (fuera de la lusofonía)"]]],ph:["Ex.: venho com a minha filha de 6 anos e tenho uma oferta de trabalho em Lisboa.","E.g. I'm coming with my 6-year-old daughter and have a job offer in Lisbon.","P. ej.: vengo con mi hija de 6 años y tengo una oferta de trabajo en Lisboa."]},
+ filho:{q:["Qual é a tua situação?","What is your situation?","¿Cuál es tu situación?"],o:[["primeiro",["Primeiro filho","First child","Primer hijo"]],["mais",["Já tenho filhos","I already have children","Ya tengo hijos"]],["sozinho",["Vou criar sozinho(a)","I'll be a single parent","Voy a criar solo/a"]]],ph:["Ex.: trabalho por conta própria e não sei como fica a licença.","E.g. I'm self-employed and don't know how leave works.","P. ej.: soy autónomo/a y no sé cómo funciona el permiso."]},
+ emigrar:{q:["Para que país?","Which country?","¿A qué país?"],o:[["es",["Espanha","Spain","España"]],["fr",["França","France","Francia"]],["de",["Alemanha","Germany","Alemania"]],["uk",["Reino Unido","United Kingdom","Reino Unido"]],["ch",["Suíça","Switzerland","Suiza"]],["nl",["Países Baixos ou Bélgica","Netherlands or Belgium","Países Bajos o Bélgica"]],["out",["Outro país","Another country","Otro país"]]],ph:["Ex.: enfermeira, já tenho uma entrevista marcada e quero levar a minha família.","E.g. a nurse, I already have an interview and want to bring my family.","P. ej.: enfermera, ya tengo una entrevista y quiero llevar a mi familia."]},
+ reforma:{q:["Qual é o teu regime?","Which pension scheme are you in?","¿En qué régimen estás?"],o:[["priv",["Setor privado","Private sector","Sector privado"]],["pub",["Função pública","Civil service","Función pública"]],["ind",["Trabalhador independente","Self-employed","Autónomo"]],["mix",["Um pouco de tudo","A bit of everything","Un poco de todo"]]],ph:["Ex.: trabalhei 10 anos no estrangeiro e tenho dúvidas sobre os descontos.","E.g. I worked abroad for 10 years and have questions about my contributions.","P. ej.: trabajé 10 años en el extranjero y tengo dudas sobre las cotizaciones."]}};
+const specOf=gid=>{const x=U.spec[gid]||{};return {a:x.a||"",t:x.t||""}};
+const specOpt=gid=>{const c=SPEC[gid];return c&&c.o.find(x=>x[0]===specOf(gid).a)||null};
+function specTxt(gid){const c=SPEC[gid];if(!c)return "";const o=specOpt(gid),t=specOf(gid).t.trim();return [o?c.q[0]+" "+o[1][0]:"",t?"Detalhes da pessoa: "+t:""].filter(Boolean).join(". ")}
+function specAdded(gid){const o=specOpt(gid);return o&&o[2]?o[2].filter(id=>S[id]):[]}
+function specCard(gid){
+  const c=SPEC[gid];if(!c)return "";const sp=specOf(gid),added=specAdded(gid),filled=!!(sp.a||sp.t.trim());
+  return `<section class="spec ${filled?"":"need"}" aria-label="${esc(u("spec_h"))}">
+   <div class="spec-h"><b>${u("spec_h")}</b><small>${u("spec_s")}</small></div>
+   <div class="fork"><span class="q">${L(c.q)}</span><div class="seg">${c.o.map(([v,t])=>`<button data-spec="${gid}" data-v="${v}" aria-pressed="${sp.a===v}">${L(t)}</button>`).join("")}</div></div>
+   <label class="sfield"><span>${u("spec_more")}</span><textarea data-spectxt="${gid}" rows="3" maxlength="400" placeholder="${esc(L(c.ph))}">${esc(sp.t)}</textarea></label>
+   ${added.length?`<p class="spec-add"><b>${u("spec_added")}</b> ${added.map(id=>esc(stp(id).t)).join(" · ")}</p>`:""}
+   <p class="note">${u("spec_note")}</p></section>`}
+Object.assign(UI.pt,{spec_h:"Conta-nos o teu caso",spec_s:"Quanto mais específico fores, mais o caminho se adapta a ti. Os passos, os emails e as simulações mudam com isto.",spec_more:"Queres dar mais informação? (opcional)",spec_added:"Acrescentado ao teu caminho:",spec_note:"Fica só guardado neste navegador. Se usares as funções de IA, o texto vai para o teu Claude."});
+Object.assign(UI.en,{spec_h:"Tell us about your case",spec_s:"The more specific you are, the more the path adapts to you. Steps, emails and simulations change with this.",spec_more:"Want to add more detail? (optional)",spec_added:"Added to your path:",spec_note:"Only saved in this browser. If you use the AI features, the text goes to your Claude."});
+Object.assign(UI.es,{spec_h:"Cuéntanos tu caso",spec_s:"Cuanto más específico seas, más se adapta el camino a ti. Los pasos, los emails y las simulaciones cambian con esto.",spec_more:"¿Quieres añadir más detalle? (opcional)",spec_added:"Añadido a tu camino:",spec_note:"Solo se guarda en este navegador. Si usas las funciones de IA, el texto va a tu Claude."});
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||!b.dataset.spec)return;const x=U.spec[b.dataset.spec]=U.spec[b.dataset.spec]||{};x.a=x.a===b.dataset.v?"":b.dataset.v;save();render();e.stopImmediatePropagation()},true);
+document.addEventListener("input",e=>{const t=e.target;if(t.dataset&&t.dataset.spectxt){const x=U.spec[t.dataset.spectxt]=U.spec[t.dataset.spectxt]||{};x.t=t.value.slice(0,400);save();e.stopImmediatePropagation()}},true);
 
 // ================= Núcleo =================
 const load=k=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}};
@@ -1488,7 +1553,9 @@ const TEL={SNS:"808 24 24 24",SS:"300 502 502",AT:"217 206 707"};
 function forksOf(gid,ov){const g=GI[gid],st=Object.assign({},U.forks[gid]||{},ov||{}),o={};g.forks.forEach(fk=>{o[fk.id]=st[fk.id]||fk.d(P)});return o}
 function plan(gid,ov){
   const g=GI[gid],f=forksOf(gid,ov),seen=new Set();
-  const phases=g.steps(P,f).map(([ph,ids])=>[ph,ids.filter(id=>S[id]&&!seen.has(id)&&seen.add(id))]).filter(x=>x[1].length);
+  const base0=g.steps(P,f),xs=specAdded(gid);
+  if(xs.length){const i=base0.findIndex(x=>x[0]==="Registar");base0.splice(i<0?base0.length:i,0,["Setor",xs])}
+  const phases=base0.map(([ph,ids])=>[ph,ids.filter(id=>S[id]&&!seen.has(id)&&seen.add(id))]).filter(x=>x[1].length);
   const all=phases.flatMap(x=>x[1]),todo=all.filter(id=>!isDone(id)&&!isSkip(id));
   const mid=c=>Array.isArray(c)?(c[0]+c[1])/2:(c||0);
   return {g,f,phases,all,todo,weeks:todo.reduce((a,id)=>a+(S[id].w||0),0),cost:Math.round(todo.reduce((a,id)=>a+mid(S[id].c),0)),monthly:all.reduce((a,id)=>a+(S[id].cm||0),0),ents:[...new Set(all.map(id=>S[id].e))].filter(e=>e!=="TU"),meta:g.meta(P,f)};
@@ -1553,21 +1620,11 @@ PEDIDO: ${HKIND[kind]}
 No máximo 200 palavras.`}
 async function helpRun(key,kind){
   const info=HINFO[key];if(!info||!sampleFn)return;
-  const ctl=new AbortController();HELP[key]={busy:true,text:"",err:"",ctl};render();
+  const ctl=new AbortController();HELP[key]={busy:true,text:"",err:"",ctl,kind};render();
   try{await sampleFn(helpPrompt(info,kind),{signal:ctl.signal,cache:false,onText:({text})=>{const first=!HELP[key].text;HELP[key].text=text;const el=document.getElementById("hout-"+key);if(el&&!first)el.textContent=text;else render()}});HELP[key].busy=false}
   catch(e){HELP[key].busy=false;if(e&&e.text)HELP[key].text=e.text;if(!(e&&e.code==="cancelled"))HELP[key].err=errMsg(e)}
   render();
 }
-function helpBlock(key,info){
-  HINFO[key]=info;if(sampleState==="off")return "";
-  const s=HELP[key]||{},b=(k,t)=>`<button data-help="${key}" data-kind="${k}" ${s.busy?"disabled":""}>${t}</button>`;
-  return `<div class="helper"><div class="ht">${u("help_t")}<small>${u("help_s")}</small></div>
-  <div class="hb">${b("email",u("help_email"))}${b("balcao",u("help_desk"))}${b("lista",u("help_list"))}</div>
-  ${s.busy&&!s.text?`<div class="hrow"><span class="pulse" aria-hidden="true"></span><span class="note">${u("preparing")}</span></div>`:""}
-  ${s.text?`<div class="hout" id="hout-${key}">${esc(s.text)}</div><div class="hrow"><button class="btn sm" data-copy="${key}">${u("copy")}</button>${s.busy?`<button class="btn sm" data-hstop="${key}">${u("stop")}</button>`:""}</div>`:""}
-  ${s.err?`<div class="err">${esc(s.err)}</div>`:""}</div>`;
-}
-
 // ================= Componentes =================
 function station(id){
   const s=stp(id),have=isHave(id),done=isDone(id),open=!!U.open[id],on=ONLINE.has(id),a=(U.acts||{})[id],ak=a&&a.k;
@@ -1580,7 +1637,7 @@ function station(id){
    ${s.l?`<p class="bring"><b>${u("bring")}:</b> ${esc(s.l)}</p>`:""}
    ${s.x?`<div class="hid"><b>${u("hidden")}</b>${esc(s.x)}</div>`:""}
    ${s.i?`<div class="impl"><b>${u("next_changes")}</b>${esc(s.i)}</div>`:""}
-   ${have?"":helpBlock("s-"+id,{t:S[id].t,ent:ENTL.pt[s.e],how:S[id].h,l:S[id].l,ctx:U.goal&&GI[U.goal]?"Objetivo: "+GI[U.goal].t[0]:""})}
+   ${have?"":helpBlock("s-"+id,{t:S[id].t,ent:ENTL.pt[s.e],how:S[id].h,l:S[id].l,ctx:U.goal&&GI[U.goal]?"Objetivo: "+GI[U.goal].t[0]+(specTxt(U.goal)?". "+specTxt(U.goal):""):"",sp:U.tab==="planear"&&U.goal&&GI[U.goal]?specOf(U.goal).t.trim():""})}
    <div class="st-actions"><span class="links">${verBadge(id)}${s.u?`<a href="${s.u}" target="_blank" rel="noopener">${s.u.replace("https://","").replace(/\/$/,"")} ↗</a>`:""}${TEL[s.e]?`<span class="tel">${u("phone")}: <b>${TEL[s.e]}</b></span>`:""}</span>
     ${have?`<span class="flag-have">${u("marked_profile")}</span>`:""}</div>
    ${have?"":didBlock(id)}
@@ -1606,11 +1663,14 @@ function tripPanel(pl){
    <details class="box"><summary><span><b>${u("bag_h")}</b><small>${u("bag_s")}</small></span><span class="num">${items.length}</span></summary><div class="box-b"><div class="bag">${items.map(x=>`<button data-bag="${esc(x.toLowerCase())}" aria-pressed="${!!U.bag[x.toLowerCase()]}">${esc(x)}</button>`).join("")||`<p class="note">${u("bag_none")}</p>`}</div></div></details>`;
 }
 
+function modeSwitch(active,gid){
+  return `<nav class="diff" aria-label="${esc(u("mode_l"))}">${[["planear",u("mode_plan_q"),u("diff_plan")],["simular",u("mode_sim_q"),u("diff_sim")]].map(([k,q,d])=>{const on=k===active,at=gid?(k==="planear"?`data-goal="${gid}"`:`data-tmgoal="${gid}"`):`data-tab="${k}"`;
+   return `<button ${at} class="mode ${on?"on":""}" aria-current="${on?"page":"false"}"><b>${icon(k)} ${q}</b><span>${d}</span></button>`}).join("")}</nav>`}
 // ================= Planear =================
 function vPlanear(){
   if(U.goal&&GI[U.goal])return vPlan();
   return `${hereCard("m-only")}<section class="sec-h"><span class="kicker">${G.length} · ${u("all_dest")}</span><h2>${hl(u("plan_h"))}</h2><p>${u("plan_p")}</p></section>
-  <div class="diff"><div class="on"><b>${icon("planear")} ${u("tab_planear")}</b><span>${u("diff_plan")}</span></div><div><b>${icon("simular")} ${u("tab_simular")}</b><span>${u("diff_sim")}</span></div></div>
+  ${modeSwitch("planear")}
   <div class="lines">${G.map(g=>{const pl=plan(g.id);return `<button class="line-card" data-goal="${g.id}" style="--c:var(${g.c})">
    <span class="lc-top"><span class="lb">${gIcon(g.id)}</span><span class="meta">${pl.all.length} ${u("stops")} · ~${durTxt(pl.weeks)}${devIds(pl).length?` · <em>${devIds(pl).length} ${u("alt_tag")}</em>`:""}</span></span>
    <b>${L(g.t)}</b><small>${L(g.sub)}</small>
@@ -1622,7 +1682,9 @@ function vPlan(){
     return `<div class="phase"><div class="ph-h"><span class="zone">${phase(ph)}</span><span class="age">${u("from_age",{n:ageAt})}</span></div><ol class="stations">${ids.map(station).join("")}</ol></div>`}).join("");
   return `<div class="split" style="--c:var(${g.c})"><div class="col-main">
   <section class="plan-h band"><button class="back" data-goal="">← ${u("all_dest")}</button><div class="plan-title"><span class="lb">${gIcon(g.id,24)}</span><h2>${L(g.t)}</h2></div><p>${L(g.sub)}</p></section>
+  ${modeSwitch("planear",g.id)}
   ${P.country!=="PT"?`<div class="cnote">${u("country_note",{c:esc(cName(P.country))})} <a href="https://europa.eu/youreurope/" target="_blank" rel="noopener">Your Europe ↗</a></div>`:""}
+  ${specCard(g.id)}
   ${fitHtml(g.id,pl.f)}
   <div class="kpis m-only">${kpis(pl,doneN)}</div>
   <div class="m-only">${forkBox(g,pl)}</div>
@@ -1754,7 +1816,7 @@ function gauges(br){
 }
 const brName=b=>typeof b.nome==="number"?u("path")+" "+b.nome:b.nome;
 function ondeHtml(o,ti){if(!o.length)return "";const kk=k=>"sim-"+SIM.active+"-"+ti+"-"+k;
-  return `<details class="onde" ${o.some((x,k)=>HELP[kk(k)])?"open":""}><summary>${u("sim_onde")} (${o.length})</summary><div class="ob">${o.map((x,k)=>`<div class="ondei"><b>${esc(x.entidade)}</b><span>${esc(x.o_que)}</span>${x.passos.length?`<ol class="how">${x.passos.map(p=>`<li>${esc(p)}</li>`).join("")}</ol>`:""}${x.link?`<a href="${x.link}" target="_blank" rel="noopener">${x.link.replace("https://","").replace(/\/$/,"")} ↗</a>`:""}${helpBlock(kk(k),{t:x.o_que,ent:x.entidade,how:x.passos,ctx:"Simulação: "+SIM.ideia})}</div>`).join("")}</div></details>`}
+  return `<details class="onde" ${o.some((x,k)=>HELP[kk(k)])?"open":""}><summary>${u("sim_onde")} (${o.length})</summary><div class="ob">${o.map((x,k)=>`<div class="ondei"><b>${esc(x.entidade)}</b><span>${esc(x.o_que)}</span>${x.passos.length?`<ol class="how">${x.passos.map(p=>`<li>${esc(p)}</li>`).join("")}</ol>`:""}${x.link?`<a href="${x.link}" target="_blank" rel="noopener">${x.link.replace("https://","").replace(/\/$/,"")} ↗</a>`:""}${helpBlock(kk(k),{t:x.o_que,ent:x.entidade,how:x.passos,l:"",sp:String(SIM.det||"").slice(0,240),ctx:"Simulação: "+SIM.ideia+(SIM.det?". Detalhes: "+SIM.det:"")})}</div>`).join("")}</div></details>`}
 const busyBox=()=>`<section class="busy"><span class="pulse" aria-hidden="true"></span><p>${esc(BUSY.msg)}</p><button class="btn sm" id="simStop">${u("stop")}</button></section>`;
 function vSimularAI(){
   if(sampleState==="off")return `<section class="sec-h"><h2>${hl(u("sim_h"))}</h2><p>${u("sim_off")}</p></section><button class="linkbtn" data-tab="viver">${u("sim_guided")}</button>`;
@@ -1956,7 +2018,7 @@ es:{did_q:"¿Qué hiciste?",did_rec:"Como se recomienda",did_alt:"De otra forma"
 for(const lg in UI2)Object.assign(UI[lg],UI2[lg]);
 
 // estado das ações reais
-U.acts=U.acts||{};U.nums=U.nums||{};U.fut=U.fut||{};
+U.acts=U.acts||{};U.nums=U.nums||{};U.fut=U.fut||{};U.spec=U.spec||{};
 for(const id in (U.done||{}))if(U.done[id]&&!U.acts[id])U.acts[id]={k:"rec"};
 U.done={};
 const act=id=>U.acts[id]||null;
@@ -1991,13 +2053,14 @@ function devList(pl,fut){
 }
 
 // assinatura das entradas (para saber se a simulação está desatualizada)
-function futSig(gid){const pl=plan(gid);return JSON.stringify([LANG,P.age,P.status,P.work,P.pou,pl.f,pl.all.map(id=>[id,act(id),isHave(id)?1:0]),U.nums[gid]||{}])}
+function futSig(gid){const pl=plan(gid);return JSON.stringify([LANG,P.age,P.status,P.work,P.pou,pl.f,pl.all.map(id=>[id,act(id),isHave(id)?1:0]),U.nums[gid]||{},specOf(gid)])}
 function stepsTxt(pl){return pl.all.map(id=>{const a=act(id),t=S[id].t;let st=isHave(id)?"já tinha":!a?"por fazer":a.k==="rec"?"feito como recomendado":a.k==="skip"?"SALTADO de propósito":"feito DE OUTRA FORMA: "+(a.txt||"(sem detalhe)")+(a.val?` (valor: ${a.val} €)`:"");return `- ${id} | ${t} (${ENTL.pt[S[id].e]}) → ${st}`}).join("\n")}
 function futCtx(gid){
   const pl=plan(gid),g=pl.g,n=U.nums[gid]||{};
   return `PERFIL: ${profTxt()}
 OBJETIVO: ${g.t[0]}
 ESCOLHAS: ${g.forks.map(fk=>fk.q[0]+" "+fk.o.find(o=>o[0]===pl.f[fk.id])[1][0]).join("; ")}
+CASO ESPECÍFICO: ${specTxt(gid)||"(não indicado)"}
 NÚMEROS DA PESSOA: dinheiro investido ${n.inv!=null&&n.inv!==""?n.inv+" €":"(não indicado)"}; horas por semana ${n.hrs||"(não indicado)"}; nota: ${n.note||"—"}
 PASSOS DO CAMINHO RECOMENDADO E O QUE A PESSOA FEZ DE FACTO:
 ${stepsTxt(pl)}`}
@@ -2432,7 +2495,7 @@ function tmDecRow(gid,s,run,st,past){
   const b=(k,lab)=>`<button data-tmdec="${st.id}" data-k="${k}" aria-pressed="${kk===k}" class="did-${k}">${lab}</button>`;
   return `<li class="tmd ${kk}"><span class="tmd-m">${esc(mName(st.m))}</span><div class="tmd-b"><b>${esc(t.t)}</b><span class="ent">${esc(E(t.e))}</span>
    <div class="seg did-seg sm">${b("rec",u("did_rec"))}${b("alt",u("did_alt"))}${b("skip",u("did_skip"))}</div>
-   ${past?`<button class="linkbtn" data-tmgo="${st.m}">${u("tm_goto")}</button>`:""}<button class="linkbtn" data-tmguide="${st.id}">${u("tm_help")}</button></div></li>`}
+   ${past?`<button class="linkbtn" data-tmgo="${st.m}">${u("tm_goto")}</button>`:""}<div class="tmd-kit"><span>${u("tm_help")}:</span><button class="linkbtn" data-tmguide="${st.id}" data-m="email">✉️ ${u("hk_email")}</button><button class="linkbtn" data-tmguide="${st.id}" data-m="desk">🗣️ ${u("hk_desk")}</button><button class="linkbtn" data-tmguide="${st.id}" data-m="list">☑️ ${u("hk_list")}</button></div></div></li>`}
 function vTime(){
   const gid=TMS.gid;
   if(!gid||!GI[gid])return tmPick();
@@ -2450,6 +2513,8 @@ function vTime(){
   return `<div class="tm" style="--c:var(${g.c})">
   <section class="tm-head"><div><span class="kicker">${u("tm_kicker")}</span><h2>${L(g.t)}</h2><p>${u("tm_p")}</p></div>
    <div class="row-btns"><button class="btn sm" data-tmpick="1">← ${u("tm_other")}</button><button class="btn sm" data-goal="${gid}">${u("tm_toguide")} →</button></div></section>
+  ${modeSwitch("simular",gid)}
+  ${specCard(gid)}
   <section class="tm-ctl" aria-label="${esc(u("tm_ctl"))}">
    <div class="tm-now"><span class="tm-when">${esc(mName(cur))}</span><span class="tm-age">${cur===0?u("tm_today"):"+"+cur+" "+u(cur===1?"tm_m1":"tm_mN")} · ${age} ${u("years")}</span></div>
    <div class="tm-btns">
@@ -2492,7 +2557,7 @@ function tmPick(){
   const extra=[sampleState==="ok"?`<button class="line-card" data-tmai="1" style="--c:var(--accent)"><span class="lc-top"><span class="lb">${icon("simular")}</span><span class="meta">${u("tm_ai_tag")}</span></span><b>${u("tm_ai")}</b><small>${u("tm_ai_s")}</small></button>`:"",
    `<button class="line-card" data-tab="viver" style="--c:var(--l-violet)"><span class="lc-top"><span class="lb">${icon("simular")}</span><span class="meta">${u("tm_life_tag")}</span></span><b>${u("tm_life")}</b><small>${u("tm_life_s")}</small></button>`].join("");
   return `<section class="sec-h"><span class="kicker">${u("tm_kicker")}</span><h2>${hl(u("tm_h"))}</h2><p>${u("tm_pick_p")}</p></section>
-  <div class="diff"><div><b>${icon("planear")} ${u("tab_planear")}</b><span>${u("diff_plan")}</span></div><div class="on"><b>${icon("simular")} ${u("tab_simular")}</b><span>${u("diff_sim")}</span></div></div>
+  ${modeSwitch("simular")}
   <div class="lines">${G.map(g=>`<button class="line-card" data-tmgoal="${g.id}" style="--c:var(${g.c})"><span class="lc-top"><span class="lb">${gIcon(g.id)}</span><span class="meta">${TMS.by[g.id]&&TMS.by[g.id].br.length>1?TMS.by[g.id].br.length+" "+u("tm_brs"):u("tm_36")}</span></span><b>${L(g.t)}</b><small>${L(g.sub)}</small></button>`).join("")}${extra}</div>`}
 
 // ---------- ações ----------
@@ -2532,7 +2597,7 @@ document.addEventListener("click",e=>{
   if(d.tmfork){tmSetFork(gid,d.tmfork,d.v);e.stopImmediatePropagation();return}
   if(d.tmbr!==undefined){const s=tmState(gid);s.act=+d.tmbr;tmSave();render();e.stopImmediatePropagation();return}
   if(d.tmrm!==undefined){tmAct(gid,()=>{const s=tmState(gid),i=+d.tmrm;s.br.splice(i,1);if(s.act>=i)s.act=Math.max(0,s.act-1)});e.stopImmediatePropagation();return}
-  if(d.tmguide){U.goal=gid;U.tab="planear";U.open[d.tmguide]=true;render();setTimeout(()=>{const el=document.querySelector(`[data-open="${d.tmguide}"]`);if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"center"})},60);e.stopImmediatePropagation();return}
+  if(d.tmguide){U.goal=gid;U.tab="planear";U.open[d.tmguide]=true;if(d.m){(HK[d.tmguide]=HK[d.tmguide]||{}).m=d.m}render();setTimeout(()=>{const el=document.querySelector(`[data-open="${d.tmguide}"]`);if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"center"})},60);e.stopImmediatePropagation();return}
 },true);
 document.addEventListener("input",e=>{const t=e.target,gid=TMS.gid;if(!gid)return;
   if(t.id==="tmRange"){const s=tmState(gid);s.prev=s.cur;s.cur=+t.value;tmSave();render();const r=document.getElementById("tmRange");if(r)r.focus();return}
@@ -2549,41 +2614,44 @@ let HK={};
 const ENT_PT=e=>(ENTL.pt&&ENTL.pt[e])||e;
 const pName=()=>P.name||"[o teu nome]";
 const EMAIL_V=["info","marcar","estado","reclamar"];
-function emailText(id,v){
-  const s=S[id],t=s.t,ent=ENT_PT(s.e),docs=s.l||"";
-  const sig=`\n\nCom os melhores cumprimentos,\n${pName()}\nNIF: [o teu NIF] · Telefone: [o teu número]`;
+const hkSig=info=>(info.sp?`\n\nO meu caso: ${info.sp}`:"")+`\n\nCom os melhores cumprimentos,\n${pName()}\nNIF: [o teu NIF] · Telefone: [o teu número]`;
+function mailTxt(info,v){
+  const t=info.t,docs=info.l||"",sig=hkSig(info);
   if(v==="marcar")return {sub:`Pedido de marcação de atendimento: ${t}`,body:`Exmos. Senhores,\n\nGostaria de marcar um atendimento para tratar de: ${t}.\n${docs?`Vou levar: ${docs}.\n`:""}Tenho disponibilidade em [dias e horas]. Se for possível tratar o assunto online ou por email, agradeço que me indiquem como.\n\nPodem confirmar também se há algum custo e quanto tempo demora?${sig}`};
   if(v==="estado")return {sub:`Pedido de ponto de situação: ${t} (processo n.º [número])`,body:`Exmos. Senhores,\n\nNo dia [data] entreguei o pedido de ${t} (processo ou referência n.º [número]).\nVenho pedir informação sobre o estado do processo e se falta algum documento da minha parte.\n\nAgradeço desde já a resposta.${sig}`};
   if(v==="reclamar")return {sub:`Reclamação por atraso: ${t} (processo n.º [número])`,body:`Exmos. Senhores,\n\nNo dia [data] fiz o pedido de ${t} (processo n.º [número]) e, até hoje, não recebi resposta, apesar de [contactos já feitos].\nEste atraso está a causar-me [o problema concreto, por exemplo: não consigo começar a trabalhar / receber o apoio].\n\nPeço que me informem por escrito do estado do processo e da data prevista de decisão.\nSe não tiver resposta em 10 dias úteis, irei apresentar reclamação no Livro de Reclamações Eletrónico (livroreclamacoes.pt).${sig}`};
   return {sub:`Pedido de informação: ${t}`,body:`Exmos. Senhores,\n\nPretendo tratar de: ${t}.\nPodem confirmar, por favor:\n1. Que documentos tenho de apresentar${docs?` (penso que são: ${docs})`:""}?\n2. Se é possível tratar online ou se tenho de ir ao balcão e marcar atendimento.\n3. Qual o custo e quanto tempo costuma demorar.\n\nObrigado(a) pela ajuda.${sig}`}}
-function deskText(id){
-  const s=S[id],t=s.t,docs=s.l||"";
+function deskTxt(info){
+  const t=info.t||"",docs=info.l||"";
   return `${u("hk_say")}\n«Bom dia. Venho tratar de ${t.charAt(0).toLowerCase()+t.slice(1)}.${docs?` Trago ${docs.charAt(0).toLowerCase()+docs.slice(1)}.`:""} Pode confirmar se tenho tudo o que é preciso?»\n\n${u("hk_ask")}\n1. «Há algum custo? Posso pagar com cartão?»\n2. «Quanto tempo demora e como sei que ficou tratado?»\n3. «Falta alguma coisa que eu tenha de entregar depois?»\n4. «Há algum prazo que eu não possa falhar?»\n\n${u("hk_before")}\n«Pode dar-me um comprovativo com a data e o número do pedido?»`}
-function checkItems(id){const s=stp(id),items=[];(s.l?s.l.split(/,\s*|;\s*/):[]).forEach(x=>{x=x.trim();if(x)items.push(u("hk_bring")+": "+x)});(s.h||[]).forEach(h=>items.push(h));items.push(u("hk_proof"));return items}
+function checkItems(key){
+  const sid=key.indexOf("s-")===0&&S[key.slice(2)]?key.slice(2):null,info=HINFO[key]||{},items=[];
+  const s=sid?stp(sid):{l:info.l||"",h:info.how||[]};
+  (s.l?s.l.split(/,\s*|;\s*/):[]).forEach(x=>{x=x.trim();if(x)items.push(u("hk_bring")+": "+x)});(s.h||[]).forEach(h=>items.push(h));items.push(u("hk_proof"));return items}
 const CALC_STEP={irsjovem:["irsjovem"],atividade:["recibos"],ssindep:["recibos"],licencaparental:["parental"],arrendar:["casa"],porta65:["casa"],apoiorenda:["casa"],procurar:["casa"],orcamento:["poupanca","casa"],simular:["casa"],contrato:["salario"],estagio:["salario"],aforro:["poupanca"],ppr:["poupanca"],planonegocio:["recibos","poupanca"],montanteunico:["poupanca"]};
 const CALC_GOAL={emprego:["salario","irsjovem"],carreira:["salario","poupanca"],negocio:["recibos","poupanca"],casa:["casa","poupanca"],sair:["casa","poupanca"],mudar:["casa","salario"],filho:["parental","poupanca"],estudar:["poupanca"],emigrar:["poupanca"],reforma:["poupanca"]};
 function helpBlock(key,info){
-  const id=key.indexOf("s-")===0?key.slice(2):null;
-  if(!id||!S[id]){HINFO[key]=info;if(sampleState!=="ok")return "";const s=HELP[key]||{},b=(k,t)=>`<button data-help="${key}" data-kind="${k}" ${s.busy?"disabled":""}>${t}</button>`;
-    return `<div class="helper"><div class="hb">${b("email",u("help_email"))}${b("balcao",u("help_desk"))}${b("lista",u("help_list"))}</div>${s.text?`<div class="hout" id="hout-${key}">${esc(s.text)}</div><div class="hrow"><button class="btn sm" data-copy="${key}">${u("copy")}</button></div>`:""}</div>`}
+  const sid=key.indexOf("s-")===0&&S[key.slice(2)]?key.slice(2):null,id=sid||key;
+  info.entc=sid?S[sid].e:"x-"+String(info.ent||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,30);
   HINFO[key]=info;
-  const h=HK[id]||{},calcs=CALC_STEP[id]||[];
+  const h=HK[id]||{},calcs=sid?(CALC_STEP[sid]||[]):[],ai=sampleState==="ok",tel=TEL[info.entc];
   const tb=(m,ic,t)=>`<button data-hk="${id}" data-m="${m}" aria-pressed="${h.m===m}">${ic} ${t}</button>`;
+  const aiBtn=k=>ai?`<button class="btn sm" data-help="${key}" data-kind="${k}" ${(HELP[key]||{}).busy?"disabled":""}>${u("hk_ai")}</button>`:"";
   let body="";
-  if(h.m==="email"){const v=h.v||"info",e=emailText(id,v),txt=h.txt!=null?h.txt:e.body,to=U.mto[S[id].e]||"";
+  if(h.m==="email"){const v=h.v||"info",e=mailTxt(info,v),txt=h.txt!=null?h.txt:e.body,to=U.mto[info.entc]||"";
     body=`<div class="hk-p"><div class="seg sm">${EMAIL_V.map(x=>`<button data-hkv="${id}" data-v="${x}" aria-pressed="${v===x}">${u("hk_v_"+x)}</button>`).join("")}</div>
-     <label class="numf col"><span>${u("hk_to")}</span><input type="email" data-hkto="${S[id].e}" value="${esc(to)}" placeholder="${esc(u("hk_to_ph"))}"></label>
+     <label class="numf col"><span>${u("hk_to")}</span><input type="email" data-hkto="${info.entc}" value="${esc(to)}" placeholder="${esc(u("hk_to_ph"))}"></label>
      <label class="numf col"><span>${u("hk_subj")}</span><input type="text" id="hks-${id}" value="${esc(h.sub!=null?h.sub:e.sub)}" data-hksub="${id}"></label>
      <label class="numf col"><span>${u("hk_body")}</span><textarea id="hkt-${id}" data-hktxt="${id}" rows="11">${esc(txt)}</textarea></label>
      <p class="note">${u("hk_fill")}${LANG!=="pt"?" "+u("hk_pt"):""}</p>
-     <div class="hrow"><button class="btn sm primary" data-hkmail="${id}">${u("hk_open")}</button><button class="btn sm" data-hkcopy="${id}">${u("copy")}</button>${sampleState==="ok"?`<button class="btn sm" data-help="${key}" data-kind="email">${u("hk_ai")}</button>`:""}</div>
-     ${s_ai(key)}</div>`}
-  else if(h.m==="desk"){body=`<div class="hk-p"><pre class="hk-pre" id="hkd-${id}">${esc(deskText(id))}</pre><div class="hrow"><button class="btn sm" data-hkcopyd="${id}">${u("copy")}</button>${TEL[S[id].e]?`<a class="btn sm" href="tel:${TEL[S[id].e].replace(/\s/g,"")}">${u("hk_call")} ${TEL[S[id].e]}</a>`:""}</div>${LANG!=="pt"?`<p class="note">${u("hk_pt2")}</p>`:""}</div>`}
-  else if(h.m==="list"){const it=checkItems(id),ck=U.chk[id]||{};body=`<div class="hk-p"><ul class="hk-list">${it.map((x,i)=>`<li><label><input type="checkbox" data-hkck="${id}" data-i="${i}" ${ck[i]?"checked":""}><span>${esc(x)}</span></label></li>`).join("")}</ul><p class="note">${u("hk_list_n",{a:Object.values(ck).filter(Boolean).length,b:it.length})}</p></div>`}
+     <div class="hrow"><button class="btn sm primary" data-hkmail="${id}">${u("hk_open")}</button><button class="btn sm" data-hkcopy="${id}">${u("copy")}</button>${aiBtn("email")}</div>
+     ${s_ai(key,"email")}</div>`}
+  else if(h.m==="desk"){body=`<div class="hk-p"><pre class="hk-pre" id="hkd-${id}">${esc(deskTxt(info))}</pre><div class="hrow"><button class="btn sm" data-hkcopyd="${id}">${u("copy")}</button>${tel?`<a class="btn sm" href="tel:${tel.replace(/\s/g,"")}">${u("hk_call")} ${tel}</a>`:""}${aiBtn("balcao")}</div>${LANG!=="pt"?`<p class="note">${u("hk_pt2")}</p>`:""}${s_ai(key,"balcao")}</div>`}
+  else if(h.m==="list"){const it=checkItems(key),ck=U.chk[id]||{};body=`<div class="hk-p"><ul class="hk-list">${it.map((x,i)=>`<li><label><input type="checkbox" data-hkck="${id}" data-i="${i}" ${ck[i]?"checked":""}><span>${esc(x)}</span></label></li>`).join("")}</ul><p class="note">${u("hk_list_n",{a:Object.values(ck).filter(Boolean).length,b:it.length})}</p><div class="hrow">${aiBtn("lista")}</div>${s_ai(key,"lista")}</div>`}
   else if(h.m==="calc"){body=`<div class="hk-p">${calcs.map(calcHtml).join("")}</div>`}
   return `<div class="helper hk"><div class="ht">${u("help_t")}<small>${u("hk_s")}</small></div>
    <div class="hb">${tb("email","✉️",u("hk_email"))}${tb("desk","🗣️",u("hk_desk"))}${tb("list","☑️",u("hk_list"))}${calcs.length?tb("calc","🧮",u("hk_calc")):""}</div>${body}</div>`}
-function s_ai(key){const s=HELP[key];if(!s||(!s.text&&!s.busy))return "";return `<div class="hout" id="hout-${key}">${esc(s.text||u("preparing"))}</div><div class="hrow"><button class="btn sm" data-copy="${key}">${u("copy")}</button></div>`}
+function s_ai(key,kind){const s=HELP[key];if(!s||(!s.text&&!s.busy&&!s.err)||(kind&&s.kind&&s.kind!==kind))return "";return `${s.text||s.busy?`<div class="hout" id="hout-${key}">${esc(s.text||u("preparing"))}</div><div class="hrow"><button class="btn sm" data-copy="${key}">${u("copy")}</button>${s.busy?`<button class="btn sm" data-hstop="${key}">${u("stop")}</button>`:""}</div>`:""}${s.err?`<div class="err">${esc(s.err)}</div>`:""}`}
 
 // ---------- calculadoras ----------
 const CALC={
@@ -2615,7 +2683,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)r
   if(d.hkv){const h=HK[d.hkv]=HK[d.hkv]||{};h.v=d.v;h.txt=null;h.sub=null;render();e.stopImmediatePropagation();return}
   if(d.hkcopy){const t=document.getElementById("hkt-"+d.hkcopy),s=document.getElementById("hks-"+d.hkcopy);copyTxt((s?s.value+"\n\n":"")+(t?t.value:""),b);e.stopImmediatePropagation();return}
   if(d.hkcopyd){const t=document.getElementById("hkd-"+d.hkcopyd);copyTxt(t?t.textContent:"",b);e.stopImmediatePropagation();return}
-  if(d.hkmail){const id=d.hkmail,t=document.getElementById("hkt-"+id),s=document.getElementById("hks-"+id),to=U.mto[S[id].e]||"";
+  if(d.hkmail){const id=d.hkmail,t=document.getElementById("hkt-"+id),s=document.getElementById("hks-"+id),to=U.mto[(HINFO["s-"+id]||HINFO[id]||{}).entc]||"";
     const url="mailto:"+encodeURIComponent(to)+"?subject="+encodeURIComponent(s?s.value:"")+"&body="+encodeURIComponent(t?t.value:"");try{window.open(url,"_blank")||(location.href=url)}catch(_){location.href=url}e.stopImmediatePropagation();return}
 },true);
 document.addEventListener("input",e=>{const t=e.target,d=t.dataset||{};
@@ -2628,7 +2696,7 @@ document.addEventListener("change",e=>{const t=e.target,d=t.dataset||{};if(d.hkc
 
 // ---------- textos ----------
 const UI5={
-pt:{sim_this:"Ver na Máquina do tempo",cmp_this:"Comparar com outro caminho",tab_simular:"Máquina do tempo",nav_simular:"Tempo",tab_planear:"Guia passo a passo",nav_planear:"Passos",
+pt:{sim_this:"Ver na Máquina do tempo",cmp_this:"Comparar com outro caminho",tab_simular:"Ver o futuro",nav_simular:"Futuro",tab_planear:"Passo a passo",nav_planear:"Passos",mode_l:"Escolhe o que queres fazer",mode_plan_q:"Como faço isto?",mode_sim_q:"O que acontece depois?",
  diff_plan:"O que fazer agora, onde e como. Com email pronto, o que dizer ao balcão e contas.",diff_sim:"O que acontece depois. Avança e recua no tempo e muda decisões para ver outro futuro.",
  tm_kicker:"Máquina do tempo",tm_h:"Avança, recua e |muda o que decidiste|.",tm_pick_p:"Escolhe um objetivo. Vais ver os próximos 3 anos, mês a mês, com o teu dinheiro, o progresso e os riscos. Os passos são as tuas decisões: muda-os e vê o futuro mudar.",
  tm_p:"Arrasta a linha do tempo, carrega no gráfico ou usa os botões. Muda uma decisão do passado e nasce um ramo novo; compara os ramos lado a lado.",
@@ -2664,7 +2732,7 @@ pt:{sim_this:"Ver na Máquina do tempo",cmp_this:"Comparar com outro caminho",ta
  c_ratio:"Taxa de esforço",c_verdict:"Leitura",c_ok33:"Confortável (até 1/3)",c_mid:"Apertado: sobra pouco para imprevistos",c_high:"Muito alto: acima de 50%, o limite que o Banco de Portugal usa no crédito",c_max33:"Renda máxima confortável (1/3)",c_casa_n:"Regra prática: casa até 1/3 do rendimento líquido.",
  c_left:"Falta juntar",c_months:"Chegas lá",c_there:"Já tens o suficiente",c_never:"Sem poupar todos os meses, não chegas",c_in_m:"em {n} meses ({d})",c_emerg:"Fundo de emergência (3 a 6 meses de despesas)",c_pou_n:"Junta primeiro o fundo de emergência; depois, a meta.",
  c_days:"Dias e percentagem",c_per_mo:"Por mês, aproximadamente",c_total:"Total da licença",c_par_n:"Regras atuais: 120 dias a 100%, 150 a 80%, 150 partilhados a 100%, 180 partilhados a 83%. O subsídio não paga IRS nem Segurança Social. Há uma reforma em discussão."},
-en:{sim_this:"See it in the Time machine",tab_simular:"Time machine",nav_simular:"Time",tab_planear:"Step-by-step guide",nav_planear:"Steps",
+en:{sim_this:"See it in the Time machine",tab_simular:"See the future",nav_simular:"Future",tab_planear:"Step by step",nav_planear:"Steps",mode_l:"Choose what you want to do",mode_plan_q:"How do I do this?",mode_sim_q:"What happens next?",
  diff_plan:"What to do now, where and how. With a ready email, what to say at the desk and the maths.",diff_sim:"What happens next. Move forward and back in time and change decisions to see another future.",
  tm_kicker:"Time machine",tm_h:"Move forward, go back and |change what you decided|.",tm_pick_p:"Pick a goal. You'll see the next 3 years, month by month: your money, progress and risks. The steps are your decisions: change them and watch the future change.",
  tm_p:"Drag the timeline, click the chart or use the buttons. Change a past decision and a new branch is born; compare branches side by side.",
@@ -2700,7 +2768,7 @@ en:{sim_this:"See it in the Time machine",tab_simular:"Time machine",nav_simular
  c_ratio:"Cost ratio",c_verdict:"Reading",c_ok33:"Comfortable (up to 1/3)",c_mid:"Tight: little left for surprises",c_high:"Very high: above 50%, the limit Banco de Portugal uses for loans",c_max33:"Comfortable maximum (1/3)",c_casa_n:"Rule of thumb: housing up to 1/3 of net income.",
  c_left:"Still to save",c_months:"You get there",c_there:"You already have enough",c_never:"Without saving every month, you won't get there",c_in_m:"in {n} months ({d})",c_emerg:"Emergency fund (3 to 6 months of costs)",c_pou_n:"Build the emergency fund first; then the goal.",
  c_days:"Days and percentage",c_per_mo:"Per month, roughly",c_total:"Total for the leave",c_par_n:"Current rules: 120 days at 100%, 150 at 80%, 150 shared at 100%, 180 shared at 83%. The benefit isn't taxed. A reform is under discussion."},
-es:{sim_this:"Verlo en la Máquina del tiempo",tab_simular:"Máquina del tiempo",nav_simular:"Tiempo",tab_planear:"Guía paso a paso",nav_planear:"Pasos",
+es:{sim_this:"Verlo en la Máquina del tiempo",tab_simular:"Ver el futuro",nav_simular:"Futuro",tab_planear:"Paso a paso",nav_planear:"Pasos",mode_l:"Elige qué quieres hacer",mode_plan_q:"¿Cómo lo hago?",mode_sim_q:"¿Qué pasa después?",
  diff_plan:"Qué hacer ahora, dónde y cómo. Con email listo, qué decir en la ventanilla y las cuentas.",diff_sim:"Qué pasa después. Avanza y retrocede en el tiempo y cambia decisiones para ver otro futuro.",
  tm_kicker:"Máquina del tiempo",tm_h:"Avanza, retrocede y |cambia lo que decidiste|.",tm_pick_p:"Elige un objetivo. Verás los próximos 3 años, mes a mes: tu dinero, el progreso y los riesgos. Los pasos son tus decisiones: cámbialos y mira cómo cambia el futuro.",
  tm_p:"Arrastra la línea del tiempo, pulsa el gráfico o usa los botones. Cambia una decisión pasada y nace una rama nueva; compara las ramas lado a lado.",
@@ -2738,9 +2806,9 @@ es:{sim_this:"Verlo en la Máquina del tiempo",tab_simular:"Máquina del tiempo"
  c_days:"Días y porcentaje",c_per_mo:"Al mes, aproximadamente",c_total:"Total del permiso",c_par_n:"Reglas actuales: 120 días al 100%, 150 al 80%, 150 compartidos al 100%, 180 compartidos al 83%. La prestación no tributa. Hay una reforma en debate."}};
 for(const lg in UI5)Object.assign(UI[lg],UI5[lg]);
 // textos da apresentação, alinhados com as novas secções
-Object.assign(UI.pt,{in_1t:"Máquina do tempo",in_1p:"Avança e recua mês a mês, muda uma decisão do passado e vê nascer outro futuro, com dinheiro, progresso e riscos.",in_2t:"Guia passo a passo",in_2p:"O que fazer, onde e como, pela ordem certa e adaptado a ti. Marca o que fizeste de facto.",in_3p:"Em cada passo tens o email pronto a enviar, o que dizer ao balcão, a lista do que levar e as contas feitas."});
-Object.assign(UI.en,{in_1t:"Time machine",in_1p:"Move forward and back month by month, change a past decision and watch another future appear, with money, progress and risks.",in_2t:"Step-by-step guide",in_2p:"What to do, where and how, in the right order and tailored to you. Mark what you actually did.",in_3p:"Each step has a ready-to-send email, what to say at the desk, your checklist and the maths done."});
-Object.assign(UI.es,{in_1t:"Máquina del tiempo",in_1p:"Avanza y retrocede mes a mes, cambia una decisión pasada y mira nacer otro futuro, con dinero, progreso y riesgos.",in_2t:"Guía paso a paso",in_2p:"Qué hacer, dónde y cómo, en el orden correcto y adaptado a ti. Marca lo que hiciste de verdad.",in_3p:"Cada paso tiene el email listo para enviar, qué decir en la ventanilla, la lista de lo que llevar y las cuentas hechas."});
+Object.assign(UI.pt,{in_1t:"Ver o futuro",in_1p:"Avança e recua mês a mês, muda uma decisão do passado e vê nascer outro futuro, com dinheiro, progresso e riscos.",in_2t:"Passo a passo",in_2p:"O que fazer, onde e como, pela ordem certa e adaptado a ti. Marca o que fizeste de facto.",in_3p:"Em cada passo tens o email pronto a enviar, o que dizer ao balcão, a lista do que levar e as contas feitas."});
+Object.assign(UI.en,{in_1t:"See the future",in_1p:"Move forward and back month by month, change a past decision and watch another future appear, with money, progress and risks.",in_2t:"Step by step",in_2p:"What to do, where and how, in the right order and tailored to you. Mark what you actually did.",in_3p:"Each step has a ready-to-send email, what to say at the desk, your checklist and the maths done."});
+Object.assign(UI.es,{in_1t:"Ver el futuro",in_1p:"Avanza y retrocede mes a mes, cambia una decisión pasada y mira nacer otro futuro, con dinero, progreso y riesgos.",in_2t:"Paso a paso",in_2p:"Qué hacer, dónde y cómo, en el orden correcto y adaptado a ti. Marca lo que hiciste de verdad.",in_3p:"Cada paso tiene el email listo para enviar, qué decir en la ventanilla, la lista de lo que llevar y las cuentas hechas."});
 function vSimular(){
   if(TMS.ai&&sampleState==="ok")return `<div class="row-btns"><button class="btn sm" id="tmAiBack">← ${u("tm_aiback")}</button></div>`+vSimularAI();
   return vTime()}
