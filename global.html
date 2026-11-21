@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LifeLab Global</title>
+<style>
+:root{--bg:#faf5ec;--ink:#2b2b2b;--green:#2f4f3e;--wine:#7b2d3b;--sage:#dce5d5;--blush:#fbe9e4;--line:#e5dccb}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 Georgia,serif;background:var(--bg);color:var(--ink)}
+header{background:var(--wine);color:#fff8ee;padding:18px 16px}
+header h1{margin:0;font-size:24px}header p{margin:4px 0 0;opacity:.9;font-size:14px}
+main{max-width:720px;margin:0 auto;padding:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}
+h2{margin:0 0 10px;color:var(--green);font-size:20px}
+label{display:block;margin:10px 0 4px;font-size:14px;color:#555}
+select,input{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--blush);font:inherit}
+button{background:var(--green);color:#fff;border:0;border-radius:10px;padding:10px 14px;font:inherit;cursor:pointer}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tabs button{background:var(--sage);color:var(--green)}.tabs button.on{background:var(--green);color:#fff}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}
+.row.big{font-weight:bold;color:var(--green);font-size:18px;border:0}
+.step{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.step input{width:22px;height:22px;margin-top:3px;flex:none}
+.step small{color:#666;display:block}
+.note{font-size:13px;color:#666}
+.warn{background:var(--blush);border-radius:10px;padding:10px;font-size:13px}
+a{color:var(--wine)}
+</style>
+</head>
+<body>
+<header><h1>LifeLab Global</h1><p>Life decisions and admin guides, country by country.</p></header>
+<main>
+<div class="card">
+  <label for="country">Country</label>
+  <select id="country"></select>
+  <div id="soon" class="warn" style="display:none;margin-top:10px"></div>
+</div>
+<div id="app">
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
+</div>
+<p class="note">Simulation and guide, not legal, tax or financial advice. Always confirm on the official website. © 2026 Aisha Ismail</p>
+</main>
+<script>
+// ---------- Country packs ----------
+// Each country is a self-contained pack. Add a new one by adding an object here.
+const PACKS={
+UK:{
+  name:"United Kingdom",ready:true,cur:"£",verified:"November 2026 (tax year 2026/27)",
+  sources:[
+    ["Income Tax rates and allowances","https://www.gov.uk/income-tax-rates"],
+    ["National Insurance rates","https://www.gov.uk/national-insurance/how-much-you-pay"],
+    ["Minimum wage rates","https://www.gov.uk/national-minimum-wage-rates"]],
+  tax:{pa:12570,paTaperStart:100000,basicBand:37700,higherTop:125140,rates:[.2,.4,.45],
+       niPT:12570,niUEL:50270,niMain:.08,niUpper:.02},
+  minWage:[["21 and over (National Living Wage)",12.71],["18 to 20",10.85],["Under 18",8.00],["Apprentice",8.00]],
+  guides:{
+    job:{title:"Start your first job",steps:[
+      ["Get your National Insurance number","Most people get theirs by post around age 16. If you have none, apply through GOV.UK.","https://www.gov.uk/apply-national-insurance-number"],
+      ["Open a bank account","Your employer pays your wage into it. Bring photo ID and proof of address.",""],
+      ["Give your employer your details","They need your NI number and bank details. Check your tax code on your first payslip.","https://www.gov.uk/tax-codes"],
+      ["Check you earn at least the minimum wage","Use the checker in this app, and ask your employer if it looks too low.","https://www.gov.uk/national-minimum-wage-rates"],
+      ["Register with a GP","Do it once you have a stable address.","https://www.nhs.uk/nhs-services/gps/how-to-register-with-a-gp-surgery/"]]},
+    rent:{title:"Rent your first home",steps:[
+      ["Work out what you can afford","Use the calculator: take-home pay first, then decide a share for rent.",""],
+      ["Check the right-to-rent documents","Landlords in England must check you can legally rent. Have your passport or share code ready.","https://www.gov.uk/check-tenant-right-to-rent-documents"],
+      ["Ask where the deposit will be protected","In England the deposit must go into a government-approved scheme.","https://www.gov.uk/tenancy-deposit-protection"],
+      ["Read the tenancy agreement before signing","Check the rent, the length, notice periods and who pays bills.","https://www.gov.uk/private-renting"],
+      ["Set up council tax and utilities","Tell the council you moved in. Students may be exempt.","https://www.gov.uk/council-tax"]]},
+    self:{title:"Work for yourself",steps:[
+      ["Register for Self Assessment","Do it as soon as you start earning, and no later than 5 October after the end of the tax year you started in.","https://www.gov.uk/register-for-self-assessment"],
+      ["Keep every record","Track income and costs in one place. The Business Log in the planner works for this.",""],
+      ["Check the trading allowance","The first £1,000 of self-employed income is tax-free, with rules.","https://www.gov.uk/guidance/tax-free-allowances-on-property-and-trading-income"],
+      ["File and pay on time","The online return and the payment are due by 31 January after the tax year ends.","https://www.gov.uk/self-assessment-tax-returns/deadlines"],
+      ["Set money aside every month","Put aside a share of each payment so the tax bill is no surprise.",""]]},
+    move:{title:"Move to the UK",steps:[
+      ["Check which visa you need","Answer a few questions on GOV.UK before you plan anything.","https://www.gov.uk/check-uk-visa"],
+      ["Plan proof of money and housing","Most visas ask for proof of funds and an address.",""],
+      ["Apply for the visa","Apply online and book biometrics when asked.","https://www.gov.uk/apply-to-come-to-the-uk"],
+      ["After arriving: bank, GP, NI number","These three unlock most of daily life.","https://www.gov.uk/apply-national-insurance-number"]]}
+  }
+},
+US:{name:"United States",ready:false},
+CA:{name:"Canada",ready:false},
+AU:{name:"Australia",ready:false}
+};
+
+// ---------- Helpers ----------
+const $=id=>document.getElementById(id);
+const fmt=(c,n)=>c+Math.round(n).toLocaleString("en-GB");
+function ukTakeHome(g,t){
+  const pa=Math.max(0,t.pa-Math.max(0,(g-t.paTaperStart)/2));
+  const taxable=Math.max(0,g-pa);
+  const b=Math.min(taxable,t.basicBand);
+  const h=Math.max(0,Math.min(taxable,t.higherTop)-t.basicBand);
+  const a=Math.max(0,taxable-t.higherTop);
+  const tax=b*t.rates[0]+h*t.rates[1]+a*t.rates[2];
+  const ni=Math.max(0,Math.min(g,t.niUEL)-t.niPT)*t.niMain+Math.max(0,g-t.niUEL)*t.niUpper;
+  return {tax,ni,net:g-tax-ni};
+}
+const state={cc:"UK",tab:"guide",goal:"job",done:JSON.parse(localStorage.getItem("llg_done")||"{}")};
+
+// ---------- Render ----------
+function render(){
+  const P=PACKS[state.cc];
+  $("soon").style.display=P.ready?"none":"block";
+  if(!P.ready){$("soon").textContent=P.name+" is being built. Pick United Kingdom to try the app.";$("app").style.display="none";return}
+  $("app").style.display="block";
+  const tabs=[["guide","Step-by-step guides"],["pay","Take-home pay"],["wage","Minimum wage"],["src","Sources"]];
+  $("tabs").innerHTML=tabs.map(t=>`<button class="${state.tab==t[0]?"on":""}" data-t="${t[0]}">${t[1]}</button>`).join("");
+  $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{state.tab=b.dataset.t;render()});
+  ({guide:guide,pay:pay,wage:wage,src:src})[state.tab](P);
+}
+function guide(P){
+  const gs=P.guides;
+  let h=`<div class="card"><h2>What are you doing?</h2><select id="goal">${Object.keys(gs).map(k=>`<option value="${k}" ${k==state.goal?"selected":""}>${gs[k].title}</option>`).join("")}</select></div>`;
+  const g=gs[state.goal];
+  h+=`<div class="card"><h2>${g.title}</h2>`+g.steps.map((s,i)=>{
+    const id=state.cc+"_"+state.goal+"_"+i;
+    return `<div class="step"><input type="checkbox" data-id="${id}" ${state.done[id]?"checked":""}><div><b>${s[0]}</b><small>${s[1]}</small>${s[2]?`<small><a href="${s[2]}" target="_blank" rel="noopener">Official page</a></small>`:""}</div></div>`}).join("")+`</div>`;
+  $("view").innerHTML=h;
+  $("goal").onchange=e=>{state.goal=e.target.value;render()};
+  $("view").querySelectorAll("input[type=checkbox]").forEach(c=>c.onchange=()=>{state.done[c.dataset.id]=c.checked;localStorage.setItem("llg_done",JSON.stringify(state.done))});
+}
+function pay(P){
+  $("view").innerHTML=`<div class="card"><h2>Take-home pay</h2>
+  <label for="gross">Yearly salary before tax (${P.cur})</label><input id="gross" type="number" min="0" value="28000" inputmode="numeric">
+  <div id="out"></div>
+  <p class="warn">England, Wales and Northern Ireland only. Scotland has different tax bands and is not included. Student loans, pensions and tax codes are not included.</p></div>`;
+  const go=()=>{const g=+$("gross").value||0,r=ukTakeHome(g,P.tax);
+    $("out").innerHTML=`<div class="row"><span>Income tax</span><span>${fmt(P.cur,r.tax)}</span></div><div class="row"><span>National Insurance</span><span>${fmt(P.cur,r.ni)}</span></div><div class="row big"><span>Take-home per year</span><span>${fmt(P.cur,r.net)}</span></div><div class="row big"><span>Take-home per month</span><span>${fmt(P.cur,r.net/12)}</span></div>`};
+  $("gross").oninput=go;go();
+}
+function wage(P){
+  $("view").innerHTML=`<div class="card"><h2>Is my hourly pay legal?</h2>
+  <label>Age group</label><select id="age">${P.minWage.map((m,i)=>`<option value="${i}">${m[0]}</option>`).join("")}</select>
+  <label>Your hourly pay (${P.cur})</label><input id="hr" type="number" step="0.01" value="12.00">
+  <div id="res" class="warn" style="margin-top:12px"></div></div>`;
+  const go=()=>{const m=P.minWage[+$("age").value],h=+$("hr").value||0;
+    $("res").textContent=h>=m[1]?`OK: ${P.cur}${h.toFixed(2)} is at or above the ${P.cur}${m[1].toFixed(2)} minimum for this group.`:`Too low: the minimum for this group is ${P.cur}${m[1].toFixed(2)} an hour. Ask your employer or contact Acas.`};
+  $("age").onchange=go;$("hr").oninput=go;go();
+}
+function src(P){
+  $("view").innerHTML=`<div class="card"><h2>Sources</h2><p class="note">Figures checked: ${P.verified}.</p>`+P.sources.map(s=>`<div class="row"><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></div>`).join("")+`</div>`;
+}
+
+$("country").innerHTML=Object.keys(PACKS).map(k=>`<option value="${k}">${PACKS[k].name}${PACKS[k].ready?"":" (coming soon)"}</option>`).join("");
+$("country").onchange=e=>{state.cc=e.target.value;render()};
+render();
+</script>
+</body>
+</html>
